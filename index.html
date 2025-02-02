@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffccdd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .container {
+            max-width: 90%;
+        }
+        .heart {
+            font-size: 60px;
+            color: red;
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 24px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .yes {
+            background-color: #ff4d4d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.5);
+        }
+        .yes:hover {
+            transform: scale(1.1);
+        }
+        .no {
+            background-color: #ccc;
+            color: black;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+        .gif-container img {
+            width: 100%;
+            max-width: 300px;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        .modal h2 {
+            color: red;
+            font-size: 30px;
+        }
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+            button {
+                font-size: 20px;
+                padding: 12px 25px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .modal {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-container">
+        <img src="milk-and-mocha-milk-and-mocha-bear.gif" alt="Milk and Mocha Bear">
+    </div>
+    <div class="container">
+        <h1>Will You Be My Valentine? <span class="heart">❤️</span></h1>
+        <div class="buttons">
+            <button class="yes" onclick="showModal('yes')">Yes</button>
+            <button class="no" onclick="showModal('no')" onmouseover="moveButton(this)">No</button>
+        </div>
+    </div>
+
+    <!-- Yes Modal -->
+    <div id="yes-modal" class="modal">
+        <h2>I Love You! ❤️</h2>
+        <p>You made my day! 🎉</p>
+        <button onclick="closeModal('yes-modal')">Close</button>
+    </div>
+
+    <!-- No Modal -->
+    <div id="no-modal" class="modal">
+        <h2>Try Again 😢</h2>
+        <p>Are you sure? Please think again... 💔</p>
+        <button onclick="closeModal('no-modal')">Okay...</button>
+    </div>
+
+    <script>
+        function moveButton(button) {
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.transform = `translate(${x - button.offsetLeft}px, ${y - button.offsetTop}px)`;
+        }
+
+        function showModal(type) {
+            if (type === "yes") {
+                document.getElementById("yes-modal").style.display = "block";
+            } else {
+                document.getElementById("no-modal").style.display = "block";
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+    </script>
+</body>
+</html>
